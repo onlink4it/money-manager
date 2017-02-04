@@ -1,0 +1,49 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Detailed Report</h4>
+			</div>
+			<div class="box-body">
+				<div class="col-md-6 table-responsive">
+					<h3>Income Detailed Report</h3>
+					<table class="table table-hover table-bordered">
+						<tr class="btn-success">	
+							<th>Comment</th>
+							<th>Amount</th>
+							<th>Date</th>
+						</tr>
+						{% for x in in_trans %}
+						<tr>
+							<td>{{ x.comment }}</td>
+							<td>{{ x.amount }}</td>
+							<td>{{ x.date }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+				<div class="col-md-6 table-responsive">
+					<h3>Outcome Detailed Report</h3>
+					<table class="table table-hover table-bordered">
+						<tr class="btn-danger">	
+							<th>Comment</th>
+							<th>Amount</th>
+							<th>Date</th>
+						</tr>
+						{% for y in out_trans %}
+						<tr>
+							<td>{{ y.comment }}</td>
+							<td>{{ y.amount }}</td>
+							<td>{{ y.date }}</td>
+						</tr>
+						{% endfor %}
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

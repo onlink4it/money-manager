@@ -1,0 +1,26 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+			<h4 class="box-title">Add SubCategory</h4>
+			</div>
+			<div class="box-body">
+				<form action="#" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+						<label class="control-label">Main Category</label>
+						<select class="form-control" name="parent" >
+							<option value="{{maincategory.id}}">{{maincategory.name}}</option>
+						</select>
+						<label class="control-label">SubCategory Name</label>
+						<input type="text" class="form-control " name="name">
+						<input class="btn btn-success pull-right" type="submit" value="Add" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

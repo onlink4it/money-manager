@@ -1,0 +1,59 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">All Transactions</h4>
+			</div>
+			<div class="box-body">
+						<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr class="btn-info">
+								<th>Date</th>
+								<th>Category</th>
+								<th>Amount</th>
+								<th>Comment</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for trans in in_trans %}
+							<tr class="bg-green">
+								<td>{{ trans.date}}</td>
+								<td>{{ trans.sub_cat }}</td>
+								<td>{{ trans.amount }}</td>
+								<td>{{ trans.comment }}</td>
+								<td>
+									<a href="{% url 'basic:edit_income' trans.id %}"><span class="btn btn-info glyphicon glyphicon-edit"></span></a>
+									<a href="{% url 'basic:delete_income'  trans.id %}"><span class="btn btn-danger glyphicon glyphicon-remove"></span></a>
+								</td>
+							</tr>
+							{% endfor %}
+							{% for trans in out_trans %}
+							<tr class="bg-red">
+								<td>{{ trans.date}}</td>
+								<td>{{ trans.sub_cat }}</td>
+								<td>{{ trans.amount }}</td>
+								<td>{{ trans.comment }}</td>
+								<td>
+								<a href="{% url 'basic:edit_outcome' trans.id %}"><span class="btn btn-info glyphicon glyphicon-edit"></span></a
+									<a href="{% url 'basic:delete_outcome' trans.id %}"><span class="btn btn-danger glyphicon glyphicon-remove"></span></a></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr class="btn-info">
+								<th>Date</th>
+								<th>Category</th>
+								<th>Amount</th>
+								<th>Comment</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

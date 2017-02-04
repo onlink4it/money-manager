@@ -1,0 +1,163 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Dashboard</h4>
+			</div>
+			<div class="box-body">
+			        	<div class="col-md-4 col-xs-12">
+			          		<!-- small box -->
+			          		<div class="small-box bg-aqua">
+			            		<div class="inner">
+			              			<h3>{{ current_balance }}</h3>
+			              			<p>Balance</p>
+			           			</div>
+				            	<div class="icon">
+				              		<i class="ion ion-ios-calculator"></i>
+				           	 	</div>
+				            	<a href="{% url 'basic:allreport' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				            </div>
+			          	</div>
+			        	<div class="col-md-4 col-xs-12">
+			          		<!-- small box -->
+			          		<div class="small-box bg-green">
+			            		<div class="inner">
+			              			<h3>{{ in_sum }}</h3>
+			              			<p>Total Income</p>
+			           			</div>
+				            	<div class="icon">
+				              		<i class="ion ion-plus-circled"></i>
+				           	 	</div>
+			            		<a href="{% url 'basic:incomereport' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+			            	</div>
+			          	</div>
+			        	<div class="col-md-4 col-xs-12">
+			          		<!-- small box -->
+			          		<div class="small-box bg-red">
+			            		<div class="inner">
+			              			<h3>{{ out_sum }}</h3>
+			              			<p>Total Outcome</p>
+			           			</div>
+				            	<div class="icon">
+				              		<i class="ion ion-minus-circled"></i>
+				           	 	</div>
+				            	<a href="{% url 'basic:outcomereport' %}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				            </div>
+			          	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Summary By MainCategory</h4>
+			</div>
+			<div class="box-body">
+				<div class="col-md-12 table-responsive">
+					<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Category</th>
+							<th class="btn-success">Income</th>
+							<th class="btn-danger">Outcome</th>
+							<th class="btn-info">Balance</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for x,y in income_by_maincategory %}
+						<tr>
+							<td><a href="{% url "basic:report" x.0 %}">{{x.1}}</a></td> 
+							{% for z in y %}
+								<td>{{z}}</td>
+							{% endfor %}
+						</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>Total</td>
+							<td class="btn-success">{{ in_sum }}</td>
+							<td class="btn-danger">{{ out_sum }}</td>
+							<td class="btn-info">{{ current_balance }}</td>
+						</tr>
+					</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Recent Transactions</h4>
+			</div>
+			<div class="box-body">
+					<div class="col-md-6 table-responsive">
+						<h4>Recent Income Transactions</h4>
+						<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr class="btn-success">
+								<th>Date</th>
+								<th>Category</th>
+								<th>Amount</th>
+								<th>Comment</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for trans in recent_in_trans %}
+							<tr>
+								<td>{{ trans.date}}</td>
+								<td>{{ trans.sub_cat }}</td>
+								<td>{{ trans.amount }}</td>
+								<td>{{ trans.comment }}</td>
+								<td>
+									<a href="{% url 'basic:edit_income' trans.id %}" ><span class="btn btn-info glyphicon glyphicon-edit"></span></a>
+									<a href="{% url 'basic:delete_income' trans.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+						</table>
+					</div>
+					<div class="col-md-6 table-responsive">
+						<h4>Recent Outcome Transactions</h4>
+						<table id="example1" class="table table-bordered table-striped">
+							<thead>
+								<tr class="btn-danger">
+									<th>Date</th>
+									<th>Category</th>
+									<th>Amount</th>
+									<th>Comment</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for trans in recent_out_trans %}
+								<tr>
+									<td>{{ trans.date}}	</td>
+									<td>{{ trans.sub_cat }}</td>
+									<td>{{ trans.amount }}</td>
+									<td>{{ trans.comment }}</td>
+									<td>
+										<a href="{% url 'basic:edit_outcome' trans.id %}" ><span class="btn btn-info glyphicon glyphicon-edit"></span></a>
+										<a href="{% url 'basic:delete_outcome' trans.id %}" ><span class="btn btn-danger glyphicon glyphicon-remove"></span></a>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

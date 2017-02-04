@@ -1,0 +1,35 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-danger">
+			<div class="box-header">
+				<h4 class="box-title">Add Outcome Transaction</h4>
+			</div>
+			<div class="box-body">
+			{% if error_message %}<div class="btn-danger"><strong>{{error_message}}</strong></div>{% endif %}
+			<form class="form-group" action="#" method="POST">
+				{% csrf_token %}
+				<label class="form-label">Category</label>
+				<select class="form-control" name="sub_cat">
+					{% for x in all_SubCategories %}
+						<option value="{{x.id}}">{{x}}</option>
+						}
+					{% endfor %}
+				</select>
+				<label class="form-label">Amount</label>
+				<input type="text" class="form-control" name="amount">
+				<label class="form-label">Comment</label>
+				<input type="text" name="comment" class="form-control">
+				<label class="form-label">Date</label>
+				<input type="text" name="date" class="form-control">
+
+				<button type="submit" value="Submit" class="btn btn-success">Submit</button>
+			</form>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

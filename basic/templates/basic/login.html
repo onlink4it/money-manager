@@ -1,0 +1,32 @@
+{% extends 'basic/visitorbase.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+				<h4 class="box-title">Login</h4>
+			</div>
+			<div class="box-body">
+				{% if error_message %}
+			                        <div class="callout callout-danger"><p><strong>{{ error_message }}</strong></p></div>	
+			            {% endif %}
+			            <form class="form-horizontal" role="form" action="{% url 'basic:login_user' %}" method="post" enctype="multipart/form-data">
+			                        {% csrf_token %}
+
+			                       		<label class="form-label">Username</label>
+			                        	<input type="text" name="username" class="form-control">
+
+			                       		<label class="form-label">Password</label>
+			                        	<input type="password" name="password" class="form-control">
+
+			                   	<div class="form-group">
+			                       		<div class="col-sm-offset-2 col-sm-10">
+			                        		<button type="submit" class="btn btn-success">Login</button>
+			                        	</div>
+			                   	</div>
+			            </form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

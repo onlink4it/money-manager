@@ -1,0 +1,47 @@
+{% extends 'invoices/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+			<h4 class="box-title">Edit Invoice</h4>
+			<a href="{% url 'invoices:print_invoice' selected_inv.id%}" class="btn btn-warning pull-right"><span class="fa fa-print"></span></a>
+			</div>
+			<div class="box-body">
+				{% if error_message %}
+			                        <div class="callout callout-danger"><p><strong>{{ error_message }}</strong></p></div>	
+			            {% endif %}
+				<form action="#" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+                       					{% include 'invoices/form_template.html' %}
+						<input class="btn btn-success pull-right" type="submit" value="Add Item" />
+					</div>
+				</form>
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>Invoice ID</th>
+							<th>Item</th>
+							<th>Qnt</th>
+							<th>Unit Price</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in inv_items %}
+							<tr>
+								<td>{{item.invoice_id}} </td>
+								<td>{{item.item.name}}</td>
+								<td>{{item.quantity}}</td>
+								<td>{{item.unit_price}}</td>
+								<td><a href="{% url 'invoices:remove_item' item.invoice_id.id item.id %}"><span class="btn btn-danger fa fa-remove"></span></a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

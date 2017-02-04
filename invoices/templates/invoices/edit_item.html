@@ -1,0 +1,24 @@
+{% extends 'invoices/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+			<h4 class="box-title">Edit Item</h4>
+			</div>
+			<div class="box-body">
+				{% if error_message %}
+			                        <div class="callout callout-danger"><p><strong>{{ error_message }}</strong></p></div>	
+			            {% endif %}
+				<form action="" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+                       					{% include 'invoices/form_template.html' %}
+						<input class="btn btn-success pull-right" type="submit" value="Edit" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

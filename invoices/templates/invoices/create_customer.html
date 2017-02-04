@@ -1,0 +1,56 @@
+{% extends 'invoices/base.html' %}
+{% block body %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+			<h4 class="box-title">Create Customer</h4>
+			</div>
+			<div class="box-body">
+				{% if error_message %}
+			                        <div class="callout callout-danger"><p><strong>{{ error_message }}</strong></p></div>	
+			            {% endif %}
+				<form action="{% url 'invoices:create_customer' %}" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+                       					{% include 'invoices/form_template.html' %}
+						<input class="btn btn-success pull-right" type="submit" value="Create" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box box-info">
+	<div class="box-header">
+		<h4 class="box-title">Customers</h4>
+	</div>
+	<div class="box-body table-responsive">
+		<table id="example1" class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Customer</th>
+					<th>Mobile</th>
+					<th>Address</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for z in user_customers %}
+					<tr>
+						<td>{{z.id}}</td>
+						<td>{{z.name}}</td>
+						<td>{{z.mobile}}</td>
+						<td>{{z.address}}</td>
+						<td>
+							<a href="{% url 'invoices:edit_customer' z.id %}" class="btn btn-info"><span class="fa fa-edit"></span></a>
+							<a href="{% url 'invoices:delete_customer' z.id %}" class="btn btn-danger"><span class="fa fa-remove"></span></a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

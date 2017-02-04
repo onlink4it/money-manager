@@ -1,0 +1,33 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box">
+			<div class="box-header">
+				<h4 class="box-title">Report</h4>
+			</div>
+			<div class="box-body">
+				<div class="col-md-12 table-responsive">
+					<table class="table table-hover table-bordered" id="example1">
+						<tr>	
+							<th>SubCategory</th>
+							<th class="btn-success">Income</th>
+							<th class="btn-danger">Outcome</th>
+							<th class="btn-info">Balance</th>
+						</tr>
+						{% for x,y in report %}
+						<tr>
+						<td><a href="{{x.0}}">{{x.1}}</a></td>
+							{% for z in y %}
+								<td>{{z}}</td>
+							{% endfor %}
+						</tr>
+						{% endfor %}
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

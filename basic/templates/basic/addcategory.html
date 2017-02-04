@@ -1,0 +1,22 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-success">
+			<div class="box-header">
+			<h4 class="box-title">Add Category</h4>
+			</div>
+			<div class="box-body">
+				<form action="{% url 'basic:add_category' %}" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+						<label class="control-label">Category Name</label>
+						<input type="text" class="form-control " name="name">
+						<input class="btn btn-success pull-right" type="submit" value="Add" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+			<h4 class="box-title">Edit SubCategory</h4>
+			</div>
+			<div class="box-body">
+				<form action="#" method="post">
+				{% csrf_token %}
+					<div class="form-group col-md-6">
+						<label class="control-label">Main Category</label>
+						<select class="form-control" name="parent" >
+							{% for x in all_categories %}
+							<option value="{{selected_cat.id}}" {% if x.id == selected_cat.parent.id %}selected="selected"{% endif %}>{{x.name}}</option>
+							{% endfor %}
+						</select>
+						<label class="control-label">SubCategory Name</label>
+						<input type="text" class="form-control " name="name" value="{{selected_cat.name}}">
+						<input class="btn btn-success pull-right" type="submit" value="Add" />
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

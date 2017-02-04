@@ -1,0 +1,66 @@
+{% extends 'invoices/base.html' %}
+{% block body %}
+
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Dashboard</h4>
+				{% if logo_url != None %} <a href="{% url 'invoices:change_logo' %}" class="btn btn-info pull-right"> Change Logo </a>{% endif %}
+				{% if logo_url == None %}<a href="{% url 'invoices:upload_logo' %}" class="btn btn-info pull-right" >Upload Logo</a>
+				{% endif %}
+			</div>
+			<div class="box-body">
+			       	{% if logo_url != None %}
+			       		<center><img src="{{logo_url}}" style="max-height: 100px;max-width: 100px;" class="img-responsive"></center>
+			       	{% endif %}
+			       	{% if logo_url == None %}<div class="callout callout-danger">Please Upload Your Logo</div>{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box box-info">
+			<div class="box-header">
+				<h4 class="box-title">Invoices</h4>
+				<a href="{% url 'invoices:create_invoice' %}" class="btn btn-info pull-right">Create Invoice</a>
+			</div>
+			<div class="box-body">
+				<table id="example1" class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Customer</th>
+							<th>Paid</th>
+							<th>Comment</th>
+							<th>Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+						
+					<tbody>
+						{% for inv in all_inv %}
+							<tr>
+								<td>{{inv.id}}</td>
+								<td>{{inv.customer.name}}</td>
+								<td>{% if inv.is_paid == True %} <span class="fa fa-check"></span> {% endif %}</td>
+								<td>{{inv.comment}}</td>
+								<td>{{inv.date}}</td>
+								<td>
+									<a href="{% url 'invoices:print_invoice' inv.id %}" class="btn btn-warning"><span class="fa fa-print"></a>
+									<a href="{% url 'invoices:pay_invoice' inv.id %}" class="btn btn-success"><span class="fa fa-usd"></a>
+									<a href="{% url 'invoices:edit_invoice' inv.id %}" class="btn btn-info"><span class="fa fa-edit"></a>
+									<a href="{% url 'invoices:remove_invoice' inv.id %}" class="btn btn-danger"><span class="fa fa-remove"></a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

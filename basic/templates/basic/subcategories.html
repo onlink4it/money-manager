@@ -1,0 +1,27 @@
+{% extends 'basic/base.html' %}
+{% block body %}
+<div class="container container-fluid">
+	<div class="row">
+		<div class="box">
+			<div class="box-header">
+				<h4 class="box-title">SubCategories List</h4>
+					<a href="{% url 'basic:add_subcategory' maincategory_id %}"  class="btn btn-info pull-right">Add SubCategory</a>
+			</div>
+			<div class="box-body">
+				<table class="table table-hover tabled bordered">
+					{% for cat in all_categories %}
+						<tr>
+							<td>{{cat.name}}</td>
+							<td>
+								<a href = "{% url 'basic:edit_subCategory' cat.id %}"><span class="btn btn-info glyphicon glyphicon-edit"></span></a>
+								<a href = "{% url 'basic:delete_subCategory' cat.id %}" ><span class="btn btn-danger glyphicon glyphicon-remove"></span></a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>	
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

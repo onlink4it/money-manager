@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>{% block title %}.:: ON-Link ::: Money Manager ::.{% endblock %}</title>
+		<meta charset="UTF-8">
+		{% load staticfiles %}
+		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
+		<link rel="stylesheet" type="text/css" href="{% static 'basic/style.css' %}">
+		  <!-- Tell the browser to be responsive to screen width -->
+		  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		  <!-- Bootstrap 3.3.6 -->
+		  <link rel="stylesheet" href="{% static 'basic/bootstrap/css/bootstrap.min.css' %}">
+		  <!-- Font Awesome -->
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+		  <!-- Ionicons -->
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+		  <!-- DataTables -->
+		  <link rel="stylesheet" href="{% static 'basic/plugins/datatables/dataTables.bootstrap.css' %}">
+		    <!-- Morris chart -->
+  		  <link rel="stylesheet" href="{% static 'basic/plugins/morris/morris.css' %}">
+		  <!-- Theme style -->
+		  <link rel="stylesheet" href="{% static 'basic/dist/css/AdminLTE.min.css' %}">
+		  <!-- AdminLTE Skins. Choose a skin from the css/skins
+		       folder instead of downloading all of them to reduce the load. -->
+		  <link rel="stylesheet" href="{% static 'basic/dist/css/skins/_all-skins.min.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<!-- Logo -->
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavBar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="{% url 'basic:index' %}" class="navbar-brand">ON-Link</a>
+				</div>
+				<!-- Menu Items -->
+				<div class="navbar-collapse collapse" id="topNavBar">
+					<ul class="nav navbar-nav">
+						<li><a href="{% url 'basic:register' %}"><span class="gylphicon gylphicon-add"></span>Register</a></li>
+						<li><a href="{% url 'basic:login_user' %}"><span class="gylphicon gylphicon-user"></span>Login</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% block body %}
+
+		{% endblock %}
+
+
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'basic/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'basic/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static 'basic/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'basic/plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+<!-- SlimScroll -->
+<script src="{% static 'basic/plugins/slimScroll/jquery.slimscroll.min.js' %}"></script>
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{% static 'basic/plugins/morris/morris.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'basic/plugins/fastclick/fastclick.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'basic/dist/js/app.min.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'basic/dist/js/demo.js' %}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+	</body>
+</html>

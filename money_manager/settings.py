@@ -24,7 +24,11 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'wifi.onlink4it.com',
+	'197.51.69.163',
+    '*'
+	]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -50,8 +54,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'basic.apps.BasicConfig',
-    'invoices.apps.InvoicesConfig'
+    'basic',
+    'invoices'
 )
 
 MIDDLEWARE_CLASSES = (

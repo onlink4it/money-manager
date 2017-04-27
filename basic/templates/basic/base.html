@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>{% block title %}.:: ON-Link ::: Money Manager ::.{% endblock %}</title>
+		<title>{% block title %}.:: Tele-Medicine ::.{% endblock %}</title>
 		<meta charset="UTF-8">
 		{% load staticfiles %}
 		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
@@ -47,6 +47,11 @@
 						<li>
 							<a href="{% url 'basic:category_index' %}">
 								<span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp; Categories
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'basic:graphs' %}">
+								<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp; Graphs
 							</a>
 						</li>
 					</ul>

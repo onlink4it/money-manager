@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^report/all/$', views.allreport , name='allreport'),
     #graphs/
     url(r'^graph/$',views.graph,name='graph'),
+    #graphs/
+    url(r'^graphs/$',views.detailed_graph,name='graphs'),
     #categories/
     url(r'^categories/$',views.CategoryList, name="category_index"),
     #categories/

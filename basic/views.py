@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render,get_object_or_404
 from django.views import generic
 from django.template import loader
-from datetime import date
+from datetime import date,datetime
 from django.urls import reverse
 from django.db.models import Q
 from .forms import CategoryForm, SubCategoryForm, InTransactionForm, OutTransactionForm, UserForm
@@ -166,12 +166,57 @@ def graph(request):
 	if not request.user.is_authenticated():
 		return render(request, 'basic/login.html')
 	else:
-		context={}
+		overall_report = overall_graph(request)
+		context={'overall_report':overall_report}
 		return render(request,'basic/graph.html',context)
 
+def overall_graph(request):
+		overall_report = []
+		for x in range(1,13):
+			in_trans = InTransaction.objects.filter(user=request.user, date__month= x)
+			total_in = calculate_monthly_total(in_trans)
+			out_trans = OutTransaction.objects.filter(user=request.user, date__month= x)
+			total_out = calculate_monthly_total(out_trans)
+			now = date.today()
+			if x > now.month :
+				break;
+			new_item = [x,total_in,total_out]
+			overall_report.append(new_item)
+		return overall_report
 
+def detailed_graph(request):
+	if not request.user.is_authenticated():
+		return render(request, 'basic/login.html')
+	else:
+		overall_report = overall_graph(request)
+		main_cat = Category.objects.filter(user=request.user)
+		graphs = {}
+		now = date.today()
+		for main in main_cat:
+			sub = SubCategory.objects.filter(user=request.user, parent=main)
+			monthly_list = []
+			for x in range(1,13):
+				in_total = 0
+				out_total = 0
+				for s in sub:
+					report = []
+					in_trans = InTransaction.objects.filter(user=request.user,date__month = x,sub_cat= s)
+					out_trans = OutTransaction.objects.filter(user=request.user,date__month = x,sub_cat= s)
+					in_total = in_total + calculate_monthly_total(in_trans)
+					out_total = out_total + calculate_monthly_total(out_trans)
+				if x > now.month:
+					break;
+				monthly_list.append({x:[in_total, out_total]})
+			new_item = {main.name: monthly_list}
+			graphs.update(new_item)
+		context={'graphs':graphs,'overall_report':overall_report}
+		return render(request,'basic/detailed_graph.html',context)
 
-
+def calculate_monthly_total(trans):
+	total = 0
+	for x in trans:
+		total = total + x.amount 
+	return total
 
 
 
